@@ -44,9 +44,10 @@ chmod +x ./lib4bin
 ./lib4bin -p -w -v /usr/bin/obs*
 rm -f ./lib4bin
 
-cp -nv /usr/lib/libobs*        ./shared/lib
-cp -r /usr/lib/obs-plugins     ./shared/lib
-cp -r /usr/lib/obs-scripting   ./shared/lib
+cp -nv /usr/lib/libpthread.so.0 ./shared/lib
+cp -nv /usr/lib/libobs*         ./shared/lib
+cp -r /usr/lib/obs-plugins      ./shared/lib
+cp -r /usr/lib/obs-scripting    ./shared/lib
 
 patchelf --set-rpath '$ORIGIN/../lib' ./shared/lib/obs-plugins/*
 patchelf --set-rpath '$ORIGIN' ./shared/lib/libobs*
