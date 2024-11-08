@@ -43,7 +43,7 @@ chmod +x ./AppRun
 # ADD LIBRARIES
 wget "$LIB4BN" -O ./lib4bin
 chmod +x ./lib4bin
-./lib4bin -p -w -v /usr/bin/obs*
+./lib4bin -p -w -v -e /usr/bin/obs*
 rm -f ./lib4bin
 
 cp -nv /usr/lib/libpthread.so.0 ./shared/lib
