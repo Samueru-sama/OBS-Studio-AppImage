@@ -71,10 +71,9 @@ find ./shared/lib -type f -regex '.*gdk.*loaders.cache' \
 # DEPLOY GRAPHIC LIBS
 cp -nv /usr/lib/librt.so.1         ./shared/lib
 cp -nv /usr/lib/libm.so.6          ./shared/lib
-cp -nv /usr/lib/libxcb.so.1        ./shared/lib
-cp -nv /usr/lib/libGLX.so.0        ./shared/lib
-cp -nv /usr/lib/libGLdispatch.so.0 ./shared/lib
-cp -nv /usr/lib/libGL.so.1         ./shared/lib
+cp -nv /usr/lib/libGL*             ./shared/lib
+cp -nv /usr/lib/libX*              ./shared/lib
+cp -nv /usr/lib/libxcb*            ./shared/lib
 
 # DELOY QT
 mkdir -p ./shared/lib/qt6/plugins
