@@ -57,6 +57,7 @@ ldd ./shared/lib/obs-plugins/* 2>/dev/null \
 echo "Deploying gdk..."
 GDK_PATH="$(find /usr/lib -type d -regex ".*/gdk-pixbuf-2.0" -print -quit)"
 cp -rv "$GDK_PATH" ./shared/lib
+cp -nv /usr/lib/libgdk-3.so.0 ./shared/lib
 echo "Deploying gdk deps..."
 find ./shared/lib/gdk-pixbuf-2.0 -type f -name '*.so*' -exec ldd {} \; \
 	| awk -F"[> ]" '{print $4}' | xargs -I {} cp -vn {} ./shared/lib
