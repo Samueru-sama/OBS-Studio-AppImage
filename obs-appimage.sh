@@ -15,10 +15,11 @@ UPINFO="gh-releases-zsync|$GITHUB_REPOSITORY_OWNER|OBS-Studio-AppImage|continuou
 LIB4BN="https://raw.githubusercontent.com/VHSgunzo/sharun/refs/heads/main/lib4bin"
 
 # Prepare AppDir
-mkdir -p ./"$PACKAGE"/AppDir/usr/share/applications
+mkdir -p ./"$PACKAGE"/AppDir/usr/share/applications ./"$PACKAGE"/AppDir/shared/lib
 cd ./"$PACKAGE"/AppDir
 cp -r /usr/share/obs ./usr/share
 cp -r /usr/share/locale ./usr/share
+cp -r /usr/lib/locale ./shared/lib
 cp /usr/share/applications/$DESKTOP ./usr/share/applications
 cp /usr/share/applications/$DESKTOP ./
 cp /usr/share/icons/hicolor/256x256/apps/"$ICON" ./
