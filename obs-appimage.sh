@@ -27,6 +27,10 @@ ln -s ./shared/lib ./lib
 
 echo '#!/bin/sh
 CURRENTDIR="$(dirname "$(readlink -f "$0")")"
+GDK_HERE="$(find "$CURRENTDIR" -type d -regex '.*gdk.*loaders' -print -quit)"
+GDK_LOADER="$(find "$CURRENTDIR" -type f -regex '.*gdk.*loaders.cache' -print -quit)"
+export GDK_PIXBUF_MODULEDIR="$GDK_HERE"
+export GDK_PIXBUF_MODULE_FILE="$GDK_LOADER"
 export XDG_DATA_DIRS="$CURRENTDIR/usr/share:$XDG_DATA_DIRS"
 export PATH="$CURRENTDIR/bin:$PATH"
 "$CURRENTDIR"/bin/TARGET "$@"' > ./AppRun
@@ -39,7 +43,7 @@ chmod +x ./lib4bin
 ./lib4bin -p -w -v /usr/bin/obs*
 rm -f ./lib4bin
 
-cp -nv /usr/lib/libobs* ./shared/lib
+cp -nv /usr/lib/libobs*        ./shared/lib
 cp -r /usr/lib/obs-plugins     ./shared/lib
 cp -r /usr/lib/obs-scripting   ./shared/lib
 
@@ -48,6 +52,16 @@ patchelf --set-rpath '$ORIGIN' ./shared/lib/libobs*
 
 ldd ./shared/lib/obs-plugins/* 2>/dev/null \
   | awk -F"[> ]" '{print $4}' | xargs -I {} cp -nv {} ./shared/lib || true
+
+  # DEPLOY GDK
+echo "Deploying gdk..."
+GDK_PATH="$(find /usr/lib -type d -regex ".*/gdk-pixbuf-2.0" -print -quit)"
+cp -rv "$GDK_PATH" ./shared/lib
+echo "Deploying gdk deps..."
+find ./shared/lib/gdk-pixbuf-2.0 -type f -name '*.so*' -exec ldd {} \; \
+	| awk -F"[> ]" '{print $4}' | xargs -I {} cp -vn {} ./shared/lib
+find ./shared/lib -type f -regex '.*gdk.*loaders.cache' \
+	-exec sed -i 's|/.*lib.*/gdk-pixbuf.*/.*/loaders/||g' {} \;
 
 # DEPLOY GRAPHIC LIBS
 cp -nv /usr/lib/librt.so.1         ./shared/lib
