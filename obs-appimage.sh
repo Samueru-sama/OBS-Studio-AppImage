@@ -69,11 +69,13 @@ find ./shared/lib -type f -regex '.*gdk.*loaders.cache' \
 	-exec sed -i 's|/.*lib.*/gdk-pixbuf.*/.*/loaders/||g' {} \;
 
 # DEPLOY GRAPHIC LIBS
-cp -nv /usr/lib/librt.so.1         ./shared/lib
-cp -nv /usr/lib/libm.so.6          ./shared/lib
-cp -nv /usr/lib/libGL*             ./shared/lib
-cp -nv /usr/lib/libX*              ./shared/lib
-cp -nv /usr/lib/libxcb*            ./shared/lib
+cp -nv /usr/lib/librt.so.1   ./shared/lib
+cp -nv /usr/lib/libm.so.6    ./shared/lib
+cp -nv /usr/lib/libGL*       ./shared/lib
+cp -nv /usr/lib/libX*        ./shared/lib
+cp -nv /usr/lib/libxcb*      ./shared/lib
+cp -nv /usr/lib/libpci*      ./shared/lib
+cp -nv /usr/lib/libLLVM*     ./shared/lib
 
 # DELOY QT
 mkdir -p ./shared/lib/qt6/plugins
