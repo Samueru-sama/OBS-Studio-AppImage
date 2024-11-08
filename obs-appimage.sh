@@ -41,7 +41,7 @@ chmod +x ./AppRun
 # ADD LIBRARIES
 wget "$LIB4BN" -O ./lib4bin
 chmod +x ./lib4bin
-./lib4bin -p -w -v /usr/bin/obs*
+./lib4bin -p -w -v -e /usr/bin/obs*
 rm -f ./lib4bin
 
 cp -nv /usr/lib/libpthread.so.0 ./shared/lib
@@ -67,12 +67,12 @@ find ./shared/lib -type f -regex '.*gdk.*loaders.cache' \
 	-exec sed -i 's|/.*lib.*/gdk-pixbuf.*/.*/loaders/||g' {} \;
 
 # DEPLOY GRAPHIC LIBS
-cp -nv /usr/lib/librt.so.1         ./shared/lib
-cp -nv /usr/lib/libm.so.6          ./shared/lib
-cp -nv /usr/lib/libxcb.so.1        ./shared/lib
-cp -nv /usr/lib/libGLX.so.0        ./shared/lib
-cp -nv /usr/lib/libGLdispatch.so.0 ./shared/lib
-cp -nv /usr/lib/libGL.so.1         ./shared/lib
+#cp -nv /usr/lib/librt.so.1         ./shared/lib
+#cp -nv /usr/lib/libm.so.6          ./shared/lib
+#cp -nv /usr/lib/libxcb.so.1        ./shared/lib
+#cp -nv /usr/lib/libGLX.so.0        ./shared/lib
+#cp -nv /usr/lib/libGLdispatch.so.0 ./shared/lib
+#cp -nv /usr/lib/libGL.so.1         ./shared/lib
 
 # DELOY QT
 mkdir -p ./shared/lib/qt6/plugins
